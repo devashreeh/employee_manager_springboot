@@ -2,5 +2,7 @@
 /home/mindbowser/Devashree/sts-4.9.0.RELEASE/Employee-Manager/src/main/java/com/example/entity/Employee.java
 /home/mindbowser/Devashree/sts-4.9.0.RELEASE/Employee-Manager/src/main/java/com/example/services/AppService.java
 /home/mindbowser/Devashree/sts-4.9.0.RELEASE/Employee-Manager/src/main/java/com/example/controller/AppController.java
+/home/mindbowser/Devashree/sts-4.9.0.RELEASE/Employee-Manager/src/main/java/com/example/repository/ManagerRepository.java
+/home/mindbowser/Devashree/sts-4.9.0.RELEASE/Employee-Manager/src/main/java/com/example/EmployeeManagerApplication.java
 /home/mindbowser/Devashree/sts-4.9.0.RELEASE/Employee-Manager/src/main/java/com/example/repository/EmployeeRepository.java
-/home/mindbowser/Devashree/sts-4.9.0.RELEASE/Employee-Manager/src/main/java/com/example/EmployeeManager/EmployeeManagerApplication.java
+/home/mindbowser/Devashree/sts-4.9.0.RELEASE/Employee-Manager/src/main/java/com/example/entity/Manager.java
