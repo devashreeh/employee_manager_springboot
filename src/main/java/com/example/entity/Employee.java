@@ -25,14 +25,12 @@ public class Employee {
 	
 	@Id 
 	@GeneratedValue
-	Long id;
-	String emp_id;
+	public Long id;
+	public String emp_id;
 	public String first_name;
 	public String last_name;
-	Date date_of_birth;
-	Long mobile;
-	String address;
-	Integer manager_id;
-	Integer isDeleted;
-
+	public Date date_of_birth;
+	public Long mobile;
+	public String address;
+	public Integer manager_id;
 }
