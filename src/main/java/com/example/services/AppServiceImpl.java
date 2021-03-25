@@ -1,28 +1,14 @@
 package com.example.services;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entity.Employee;
 import com.example.entity.Manager;
@@ -30,6 +16,7 @@ import com.example.models.ResponseModel;
 import com.example.repository.EmployeeRepository;
 import com.example.repository.ManagerRepository;
 
+@Service
 public class AppServiceImpl implements AppService {
 
 	@Autowired
@@ -43,36 +30,81 @@ public class AppServiceImpl implements AppService {
 	
 	private Object ResponseHandler = new ResponseModel() ;
 
-	public List<Employee> getEmployees() {
-		return (List<Employee>)employeeRepository.findAll();
+	public List<Employee> getEmployees() throws Exception {
+		try {
+			return (List<Employee>)employeeRepository.findAll();
+		}	
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			throw new Exception(e.getMessage());
+		}
+		
 	}
 	
-	public @ResponseBody ResponseEntity<Object> getManager() {
-		return ((ResponseModel) ResponseHandler).generateResponse(HttpStatus.OK, "Success", managerRepository.findAll());
+	public List<Manager> getManager() throws Exception {
+		try {
+			return (List<Manager>)managerRepository.findAll();
+		}
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			throw new Exception(e.getMessage());
+		}
 	}
 	
-	public @ResponseBody ResponseEntity<Object> getEmployeeById(@PathVariable Long id) {
-		return ((ResponseModel) ResponseHandler).generateResponse(HttpStatus.OK, "Success",  employeeRepository.findById(id));
+	public Optional getEmployeeById(Long id) throws Exception {
+		try {
+			return employeeRepository.findById(id);
+		}
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			throw new Exception(e.getMessage());
+		}
 	}
 	
-	public ResponseEntity<Object> saveEmployee(@RequestBody Employee requestUserDetails) {
-		return ((ResponseModel) ResponseHandler).generateResponse(HttpStatus.OK, "Success", employeeRepository.save(requestUserDetails));
+	public Object saveEmployee(Employee requestUserDetails) throws Exception {
+		try {
+			return employeeRepository.save(requestUserDetails);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			throw new Exception(e.getMessage());
+		}
+		
 	}
 	
-	public ResponseEntity<Object> saveManager(@RequestBody Manager requestManagerDetails) {
-		return ((ResponseModel) ResponseHandler).generateResponse(HttpStatus.OK, "Success", managerRepository.save(requestManagerDetails));
+	public Object saveManager(Manager requestManagerDetails) throws Exception {
+		try {
+			return managerRepository.save(requestManagerDetails);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			throw new Exception(e.getMessage());
+		}
 	}
 	
+   public Employee updateEmployee(Employee requestEmployeeDetails,Long id) throws Exception {
+	   try {
+	    Object employee = employeeRepository.findById(id);
+	   	employee = requestEmployeeDetails;
+	   	return (Employee) employeeRepository.save(employee);
+	   }
+	   catch(Exception e){
+			System.out.println(e.getMessage());
+			throw new Exception(e.getMessage());
+	   }
+   }
 
-	public ResponseEntity<Object> deleteEmployee(@PathVariable Long id) {
-		employeeRepository.deleteById(id);
-		return ((ResponseModel) ResponseHandler).generateResponse(HttpStatus.OK, "Employee deleted successfully!","");
+
+	public void deleteEmployee(@PathVariable Long id) throws Exception {
+		 try {
+			 employeeRepository.deleteById(id);
+		 }
+		 catch(Exception e){
+			 System.out.println(e.getMessage());
+			 throw new Exception(e.getMessage());
+		 }
 	}
 
 	
 	public List<Employee> getEmployeeByManagerId(Integer id) throws Exception {
-		System.out.println("here");
-		System.out.println(id);
 		try {
 			return  (List<Employee>)employeeRepository.getEmployeeByManagerId(id);
 		}

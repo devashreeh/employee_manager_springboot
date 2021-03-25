@@ -11,17 +11,19 @@ import com.example.entity.Manager;
 
 public interface AppService {
 	
-	public List<Employee> getEmployees();
+	public List<Employee> getEmployees() throws Exception;
 	
-	public ResponseEntity<Object> getManager();
+	public List<Manager> getManager() throws Exception;
 	
-	public ResponseEntity<Object> getEmployeeById(Long id);
+	public Optional getEmployeeById(Long id) throws Exception;
 	
     public List<Employee> getEmployeeByManagerId(Integer id) throws Exception;
 	
-	public ResponseEntity<Object> saveEmployee(Employee userDetails);
+	public Object saveEmployee(Employee userDetails) throws Exception;
 	
-	public ResponseEntity<Object> saveManager(Manager requestManagerDetails);
+	public Object saveManager(Manager requestManagerDetails) throws Exception;
 	
-	public ResponseEntity<Object> deleteEmployee(Long id);
+	public void deleteEmployee(Long id) throws Exception;
+	
+	public Employee updateEmployee(Employee requestUserDetails,Long id) throws Exception;
 }
