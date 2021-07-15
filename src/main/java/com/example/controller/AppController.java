@@ -37,15 +37,27 @@ public class AppController{
     @PostMapping("/login")
 	public ResponseEntity<Object> login(HttpServletRequest request, @RequestBody UserModel usersModel)
 			throws Exception {
+			try {
 		LOGGER.info("------------ In Login [web service] --------------");
 		return ((ResponseModel) ResponseHandler).generateResponse(HttpStatus.OK, "success",appService.login(usersModel, request));
+			}
+			catch(Exception e){
+    		LOGGER.error("==================Error while fetch employee list "+e.getMessage()+"=================");
+			throw new Exception(e.getMessage());
+    	}
+
 	}
     
     @PostMapping("/signup")
 	public ResponseEntity<Object> createNewUser(HttpServletRequest request, @RequestBody UserModel usersModel)
 			throws Exception {
+			try {
 		LOGGER.info("------------ In signup [web service] --------------");
 		return ((ResponseModel) ResponseHandler).generateResponse(HttpStatus.OK, "success",appService.signUp(usersModel, request));
+			}catch(Exception e){
+    		LOGGER.error("==================Error while fetch employee list "+e.getMessage()+"=================");
+			throw new Exception(e.getMessage());
+    	}
 	}
     
     @GetMapping("/employeeList")
